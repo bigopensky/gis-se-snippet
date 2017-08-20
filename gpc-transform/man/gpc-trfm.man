@@ -1,0 +1,97 @@
+.TH "GPC\-TRFM" "1" "Mai 2012" "V1.0" ""
+.SH NAME
+.PP
+gpc\-trfm \[en] Build an affine transform and calculate coordinates
+.SH SYNOPSIS
+.PP
+gpc_trfm [\-h \-d \-i \-s CHAR] \-p sx sy dx dy \-p sx sy dx dy \-p sx
+sy dx dy [\-p ...] \-c x y [\-c x y ...]
+.SH DESCRIPTION
+.PP
+\f[B]gpc\-trfm\f[] is a simple\-minded tool which creates an affine
+transform from a set of at least 3 pass points (\-p) an calculates the
+coordinates given with tag \-c forward or innverse (\-i).
+.SH GENERAL OPTIONS
+.IP \[bu] 2
+\f[B]\-h\f[], \f[B]\-\-help\f[] Show elp message
+.IP \[bu] 2
+\f[B]\-i\f[] calculate the inverse coordinates given with option \-c
+.IP \[bu] 2
+\f[B]\-d\f[] show debug messages debug
+.IP \[bu] 2
+\f[B]\-s\f[] CHAR output column separator default [space]
+.IP \[bu] 2
+\f[B]\-t\f[] list transformations parser friendly
+.IP \[bu] 2
+\f[B]\-p\f[] sx sy dx dy \f[B]\-p\f[] sx sy dx dy ...
+pass points at least 3 with sx sy source point dx dy destination point
+.IP \[bu] 2
+\f[B]\-c\f[] x y \-c x y ...coordinates to transform
+.SH EXAMPLES
+.RS
+.PP
+gpc_trfm \-s "|" \-p 1 0 10 0 \-p 0 1 0 10 \-p 1 1 10 10 \-c 1 1 \-c 1 0
+.RE
+.RS
+.PP
+gpc_trfm \-i \-p 1 0 10 0 \-p 0 1 0 10 \-p 1 1 10 10 \-c 1 1 \-c 1 0
+.RE
+.SH OUTPUT
+.PP
+Parser friendly form
+.RS
+.PP
+gpc\-trfm \-t \-s "|" \-p 1 0 10 0 \-p 0 1 0 10 \-p 1 1 10 10 \-c 1 1
+\-c 1 0
+.RE
+.IP
+.nf
+\f[C]
+\ #\ TOOL:\ GPC\ TRANSFORM
+\ TRFMX:|10.000000|0.000000|0.000000
+\ TRFMY:|0.000000|10.000000|0.000000
+\ ITRFMX:|0.100000|0.000000|0.000000
+\ ITRFMY:|0.000000|0.100000|0.000000
+\ #\ HEAD:\ SRC.X\ SRC.Y\ TRFM.X\ TRFM.Y\ ERROR.X\ ERROR.Y
+\ COORD:|1.000000|1.000000|10.000000|10.000000|0.000000|0.000000
+\ COORD:|1.000000|0.000000|10.000000|0.000000|0.000000|0.000000
+\ #\ EOF
+\f[]
+.fi
+.PP
+Human friendly form
+.RS
+.PP
+gpc\-trfm \-p 1 0 10 0 \-p 0 1 0 10 \-p 1 1 10 10 \-c 1 1 \-c 1 0
+.RE
+.IP
+.nf
+\f[C]
+\ #\ TOOL:\ GPC\ TRANSFORM
+\ #\ TRFM:\ \ X\ =\ 10.000000\ *\ x\ +\ 0.000000\ *\ y\ +\ 0.000000
+\ #\ TRFM:\ \ Y\ =\ 0.000000\ *\ x\ +\ 10.000000\ *\ y\ +\ 0.000000
+\ #\ ITRFM:\ X\ =\ 0.100000\ *\ x\ +\ 0.000000\ *\ y\ +\ 0.000000
+\ #\ ITRFM:\ Y\ =\ 0.000000\ *\ x\ +\ 0.100000\ *\ y\ +\ 0.000000
+\ #\ HEAD:\ SRC.X\ SRC.Y\ TRFM.X\ TRFM.Y\ ERROR.X\ ERROR.Y
+\ COORD:\ 1.000000\ 1.000000\ 10.000000\ 10.000000\ 0.000000\ 0.000000
+\ COORD:\ 1.000000\ 0.000000\ 10.000000\ 0.000000\ 0.000000\ 0.000000
+\ #\ EOF
+\f[]
+.fi
+.SH License
+.PP
+gpc\-trfm.c is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or any later
+version.
+.PP
+gpc\-trfm.c is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+.PP
+You should have received a copy of the GNU General Public License along
+with gpc\-trfm.c.
+If not, see <http://www.gnu.org/licenses/>.
+.SH AUTHORS
+alex.weidauer(AT)huckfinn.de Alexander Weidauer.
