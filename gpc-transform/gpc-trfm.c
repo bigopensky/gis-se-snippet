@@ -51,9 +51,8 @@ int main(int argc, char* argv[]) {
     int DEBUG = 0;
     int parse_debug = 0;
 
-    // List
+    // List maschine friendly
     int list_trfm = 0;
-    int list_itrfm = 0;
 
     // Current CLI-Tag
     char *cur_arg = NULL;
