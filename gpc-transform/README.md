@@ -2,26 +2,28 @@
 % Alexander Weidauer
 % Mai 2012
 
-# NAME
+# gpc-trfm Calculate affine transformations
+
+## NAME
 
 gpc-trfm – Build an affine transform and calculate coordinates 
 
-# INSTALLATION
+## INSTALLATION
 
 Call make, the resulting binary will be in the directory build.
 You will need [BLAS](http://www.netlib.org/blas/) and [GSL](https://www.gnu.org/software/gsl/).
 
-# SYNOPSIS
+## SYNOPSIS
 
 gpc_trfm [-h -d -i -s CHAR] -p sx sy dx dy -p sx sy dx dy -p sx sy dx dy [-p ...] -c x y [-c x y ...]
 
-# DESCRIPTION
+## DESCRIPTION
 
 **gpc-trfm** is a simple-minded tool which creates an affine transform
 from a set of at least 3 pass points (-p) an calculates the coordinates
 given with tag -c forward or innverse (-i).
 
-# GENERAL OPTIONS
+## GENERAL OPTIONS
 
 * **-h**, **--help** Show elp message
 * **-i** calculate the inverse coordinates given with option -c
@@ -33,13 +35,13 @@ given with tag -c forward or innverse (-i).
     dx dy  destination point
 * **-c** x y -c x y ...coordinates to transform
 
-# EXAMPLES
+## EXAMPLES
 
 >  gpc_trfm -s "|" -p 1 0 10 0 -p 0 1 0 10 -p 1 1 10 10 -c 1 1 -c 1 0
 
 >  gpc_trfm -i -p 1 0 10 0 -p 0 1 0 10 -p 1 1 10 10 -c 1 1 -c 1 0
 
-# OUTPUT
+## OUTPUT
 
 Parser friendly form
 
@@ -73,7 +75,7 @@ Human friendly form
  # EOF
 ```
 
-# License
+## License
 
  gpc-trfm.c is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
