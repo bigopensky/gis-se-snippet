@@ -3,9 +3,10 @@
 The repositore contains test for the reprojection accuracy of proj.4 using R,
 according to the [gis stack exchange question number: 180097]
 (https://gis.stackexchange.com/questions/180097). The question was
-related to arc gis, but for the Proj.4 tool i was for me also interesting. 
+related to arcgis. But for the Proj.4 tool the question was for me also
+interesting. 
 
-## Question 
+## Question ask by Erica 
 
 I have a feature class (South Carolina counties, so a fairly large
 geographic area) in NAD83 SC State Plane. It needs to be transformed
@@ -16,13 +17,17 @@ Can this dual transformation cause a shift in the location of the
 polygons coordinates, and by how much -- centimeters, meters,
 kilometers?
 
-## Test setup The tests uses a mix of R and perl for the main loop, to
+## Test setup
+
+The tests uses a mix of R for the reprojection and perl for the main loop, to
 iterate over test cases under a linux environment.  You will need
 [perl](http://perl.org), [proj.4](http://proj4.org), the [proj.4 R
 package](https://cran.r-project.org/web/packages/proj4/index.html) and
 [R](https://cran.r-project.org/).
 
-There tool <test-repro.R> realises the reprojection test with N samples. For example:
+The tool <test-repro.R> realises the reprojection test with N samples.
+
+Example:
 
 ```
 ./test-repro.R 1000
