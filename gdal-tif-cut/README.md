@@ -22,13 +22,20 @@ if you don't need the multicut part.
  tif-cut IN OUT EXT SZ ID X Y ID X Y ID X Y
 ```
 
-* IN Infile geotiff without extention assuming .tif
+* IN Infile geotiff 
 * OUT Outfile geotiff without extention assuming .tif
-* EXT geotiff  extention assuming .tif, the filenames for in and out will be pasted
+* EXT geotiff  extention assuming .tif, the  filenames for the outfile will be pasted togehte with the ID and the extention
 * SZ Integer size of the squared window
 * ID an Integer ID like an database key pasted into the outfile name
 * X World coordinate of the center point
 * Y World coordinate of the center point
+
+## Example
+
+```
+./build/tif-cut ../data/dem.v2.3d.tif ../data/test .tif 200 1 399261.910, 6039631.779
+display ../data/test.1.tif
+```
 
 ## License
 
