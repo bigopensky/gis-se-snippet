@@ -45,7 +45,7 @@ void error_exit(int code, const char *message, ...) {
  *  @param src_y - vector y component source coordinate system
  *  @param dst_x - vector y component destinatio coordinate system
  *  @param dst_y - vector y component destination coordinate system
- *  @param result - vecor for the affine transformation
+ *  @param result - vector for the affine transformation
  *  @returns 1 if succesfull
  *          -1 poor passpoint numbers
  *          -2 vector length mismatch
