@@ -1,6 +1,6 @@
 * GIS Stack Exchange Question 419445/26213
 
-Q: [Comparing two rasters, based on a complex set of rules.](https://gis.stackexchange.com/q/419445/26213)
+Q: Comparing two rasters, based on a complex set of rules (https://gis.stackexchange.com/q/419445/26213)
 
 ** Question:
 
