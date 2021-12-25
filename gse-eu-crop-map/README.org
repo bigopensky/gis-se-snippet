@@ -1,0 +1,42 @@
+* GIS Stack Exchange Question 418155/26213
+
+Q: [[https://gis.stackexchange.com/q/418155/26213][Reclassify very high resolution raster with R/GDAL.]]
+
+** Question
+
+I am currently processing a new crop type map for Europe, which can be
+downloaded from here:
+https://data.jrc.ec.europa.eu/dataset/15f86c84-eae1-4723-8e00-c1b35c8f56b9
+(~ 6GB). The map depicts the locations of 19 crops at a resolution of
+10x10m. I want to convert it into 19 maps, where each pixel shows the
+share of a specific crop on a 250x250 grid. I am looking for a
+workable solution that does this for one crop. With this available I
+can create a function and loop it over all crops with lapply.
+
+...the dataset is to large for a inle processing with R.
+
+** Answer
+
+This is an interesting but very large data set. I'm afraid you have to
+partition the data set in some way. If I try to access the raster in a
+"sequential" table form, I get the following message:
+
+#+begin_src R
+as.data.frame(rst.large)
+Error: cannot allocate vector of size 654.7 Gb
+#+end_src
+
+Based on your country approach I've written a small R-Sketch with a
+moderate runtime behavior. For Luxembourg the calculation needs about
+~3 minutes~, to aggregate (sum) a set of crops in 250x250 m cells.
+
+You can run this over the complete EU and could use a different
+partition polygons for larger countries. Aftermath the several country
+results could be merged with the ~gdal_merge.py~ tool.
+
+You will find the sketch in ~./mk-crop-class.R~.
+
+** Copyright
+
+- (C) 2021 A. Weidauer <alex.weidauer@huckfinn.de> 2021
+-     and is licensed by the 3-clause BSD license

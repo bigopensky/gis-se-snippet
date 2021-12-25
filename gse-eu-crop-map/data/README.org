@@ -1,0 +1,27 @@
+# Datasets
+
+## EUROCROPMAP 2018
+
+The [[https://data.jrc.ec.europa.eu/collection/id-00346][European Union Crop type Map 2018]] is a large dataset of about 6.2
+GiB and provides a crop types map for the EU in year 2018 with an
+resolution of 10x10m. The datase is to large for a GitHUB storage.
+
+You have to download the matter from the EU big data analysis platform
+~jeodpp.jrc.ec.europa.eu~ with the command
+
+#+begin_src bash
+wget https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EUCROPMAP/2018/EUCROPMAP_2018.tif
+#+end_src
+
+to run the tests. The map should be stored in this directory ~$WORK_DIR/data~.
+
+## GADM
+
+GADM cite: /"wants to map the administrative areas of all countries, at all
+levels of sub-division. We provide data at high spatial resolutions
+that includes an extensive set of attributes. This is a never ending
+project, but we are happy to share what we have. You can write us with
+questions and suggestions, using this contact form."/
+
+The dataset is hosted https://gadm.org and will be read by the
+function ~getdata(...)~ into a simple feature table.
