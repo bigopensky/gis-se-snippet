@@ -13,7 +13,7 @@ share of a specific crop on a 250x250 grid. I am looking for a
 workable solution that does this for one crop. With this available I
 can create a function and loop it over all crops with lapply.
 
-...the dataset is to large for a inle processing with R.
+...the dataset is to large for a inline processing with R.
 
 ** Answer
 
@@ -34,7 +34,7 @@ You can run this over the complete EU and could use a different
 partition polygons for larger countries. Aftermath the several country
 results could be merged with the ~gdal_merge.py~ tool.
 
-You will find the sketch in [[./mk-crop-class.R][~./mk-crop-class.R~]].
+You will find the sketch in [[./mk-crop-class.R][./mk-crop-class.R]].
 
 ** Copyright
 
