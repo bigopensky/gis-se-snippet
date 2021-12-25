@@ -34,7 +34,7 @@ You can run this over the complete EU and could use a different
 partition polygons for larger countries. Aftermath the several country
 results could be merged with the ~gdal_merge.py~ tool.
 
-You will find the sketch in ~./mk-crop-class.R~.
+You will find the sketch in [[./mk-crop-class.R][~./mk-crop-class.R~]].
 
 ** Copyright
 
