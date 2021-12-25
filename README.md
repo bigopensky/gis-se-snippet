@@ -7,6 +7,7 @@ The page contains some code snipptes, tests and examples mostly related to Geogr
 ### GIS Stack Exchange using R-Scripts
 * [test-repro-drift](./test-repro-drift) Tests for reprojection error progression for Proj.4 using R
 * [gse-geor-class-raster](./gse-geor-class-raster) Raster calculations and classification using R 
+* [gse-eu-crop-map](./gse-eu-crop-map) Sketch to partion and re-classify the EU Crop Map 2018
 
 ### GDAL Related Raster Access using the C-API
 * [gdal-tif-cut](./gdal-tif-cut)   Example to cut georeferenced subsamples from a geotiff using plain C 
