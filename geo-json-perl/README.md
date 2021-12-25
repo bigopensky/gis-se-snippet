@@ -31,33 +31,21 @@ If anyone has any info or code to perform this task, I'd love to see it.  It see
 
 # Answer 
 
-For me very interesting question, because I like perl and with the new
-swig based Geo::OGR, Geo::GDAL bindings created with GDAL 2.0.2 (good
-stuff since version 1.11) and maintained by Ari Jolma it seems to be
-perfect to handle geo stuff in perl too.
+For me very interesting question, because I like Perl and gave the new
+Swig based `Geo::GDAL` bindings to the `GDAL 2.0.2` library a try. The
+library is maintained by [Ari Jolma][1].
 
-In short: You should use the professional ogr2ogr tool and the
-following script is more a how to use GDAL with perl, how to read the
-layer infos and how to itereate over the features and create some SQL
-statements. I think perl API is very similar to the python API. I also
-avoid to handle the DBI stuff and generate a classical INSERT
-statement instead.
+In short: You should use the professional `ogr2ogr` tool and the
+following script is more a how to use `GDAL` with Perl, how to read
+the layer info's and how to iterate over the features and create some
+SQL statements. I think Perl API is very similar to the python API.
+To get an idea how to use `GDAL` in Perl you could use 80% of the
+[python cookbook][2] (language bindings cross over) and the [Perl
+class reference][3] for the rest.
 
-To get an idea how to use GDAL in perl you could use 80% of the python
-cookbook (language cross over) and the perl class reference for the
-rest.
-
-I downlaod an example cities.geojson, thanks to [Michael
-Mahemoff](https://raw.githubusercontent.com/mahemoff/geodata/master/cities.geojson). All
-the settings in the perl file are static params (`$file`, `$layer`,
-`$epsg`, field keys) and matching the content of this file. I want
-only to get an idea how it works and feels.
-
-# Query GeoJSON with GDAL and Perl
-
-Small howto use the GDAL to read GeoJSON via
-(Geo::GDAL)[https://github.com/ajolma/Geo-GDAL-2.01] provided by Ari
-Jolma.
+I download an example [cities.geojson][4], thanks to [Michael
+Mahemoff][5]. The quick and dirty coded script called `test-json.pl`
+reads GeoJSON in a GDAL like way and print SQL statments.
 
 ## Tool and data
 
@@ -125,3 +113,9 @@ Copyright (C) 2016 by ALexander Weidauer <alex.weidauer@huckfinn.de>
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.5 or,
 at your option, any later version of Perl 5 you may have available.
+
+  [1]: https://github.com/ajolma
+  [2]: https://pcjericks.github.io/py-gdalogr-cookbook/vector_layers.html
+  [3]: https://arijolma.org/Geo-GDAL/2.4/
+  [4]: https://raw.githubusercontent.com/mahemoff/geodata/master/cities.geojson
+  [5]: https://github.com/mahemoff/geodata

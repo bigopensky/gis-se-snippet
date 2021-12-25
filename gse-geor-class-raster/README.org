@@ -1,0 +1,51 @@
+* GIS Stack Exchange Question 419445/26213
+
+Q: [Comparing two rasters, based on a complex set of rules.](https://gis.stackexchange.com/q/419445/26213)
+
+** Question:
+
+I am trying to compare two rasters, say A.tif and B.tif. Both
+correspond to river bed level changes under two different flow
+conditions. Now I want to produce a comparison raster having values
+based on certain rules. The rules for the value of pixel are following:
+
+| Pixel Value | Rule                                                                                                  |
+|-------------+-------------------------------------------------------------------------------------------------------|
+|           0 | Both A and B does not cause any significant bed level change (less than 10% of Min (Range_A, Range_B) |
+|           1 | Both A and B are positive and are equal (the difference is less than 10% of Min(Range_A, Range_B)     |
+|           2 | Both A and B are negative and are equal (difference less than 10% of Min (Range_A, Range_B)           |
+|           3 | A is positive and B is negative    (A > 0 and B < 0)                                                  |
+|           4 | A is negative and B is positive     (A < 0 and B > 0)                                                 |
+|           5 | Both A and B are positive. Positive change due to A is more than that of B  (i.e., A > B)             |
+|           6 | Both A and B are positive. Positive change due to B is more than that of A  (i.e., A < B)             |
+|           7 | Both A and B are negative. Negative change due to A is more than that of B   (i.e., A < B)            |
+|           8 | Both A and B are negative. Negative change due to B is more than that of A   (i.e., A > B)            |
+
+The raster calculator in the current version of *QGIS* (3.22.2)
+supports conditional `if` statements. Although, it is possible to do
+it in the raster calculator using a complex and lengthy
+expression. Probably by looping many `if` statements in each
+other. The problem with using *Raster Calculator* is that it cannot
+programmatically get the `range` of a certain raster.
+...
+
+** Answer 
+
+A little R-script named ~mk-class-river-bed.R~ was written, to
+demonstrate the basic steps of raster calculation for the two spatial
+synchronous incoming rasters ~A.tif~ and ~B.tif~. The script handles:
+
+1. get data informations and load the GeoTiff files using ~rgadal~,
+2. Conversation of the GDAL objects to a plain R raster and
+   subsequent raster calculations,
+3. classification schema for the resulting raster,
+4. back-substitution of the result to a GeoTiff,
+5. display of the result and storage.
+
+** Copyright 
+
+- (C) 2021 A. Weidauer <alex.weidauer@huckfinn.de> 2021
+-     and is licensed by the 3-clause BSD license
+
+
+
