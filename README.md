@@ -26,8 +26,5 @@ forum.
 * [geo-json-perl](./geo-json-perl) Test case to query GeoJSON with
   GDAL and Perl using the C-API.
 
-* [gpc-transform](./gpc-transform) Build an affine transform and calculate 
-coordinates for- and backward using GDAL and C.  
-
-
-
+* [gpc-transform](./gpc-transform) Build an affine transform and calculate
+coordinates for- and backward using GDAL and C.
