@@ -16,7 +16,7 @@ visualize a path on a chart like that.
 
 ** Suggested Solution
 
-1. The border polygon to set ground control points (GCP's) in the
+1. Use the border polygon to set ground control points (GCP's) in the
    graphic (at least four) (from  [[https://gadm.org/maps/CAN/britishcolumbia_2.html][GADM]] for example),
 
 2. Create a pass point table,
@@ -74,7 +74,7 @@ visualize a path on a chart like that.
 
   ```
 6. Now you can use your "/Aviation Weather Map/" in an
-   Geo-Information-System like QGIS and overlay spatial data and
+   [[./data][Geo-Information-System like QGIS]] and overlay spatial data and
    create augmented maps.
 
 ** Copyright
