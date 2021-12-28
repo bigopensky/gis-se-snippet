@@ -43,7 +43,7 @@ visualize a path on a chart like that.
    #+end_src
 
 4. Try to go-reference your picture by these points using the tool
-   [[https://gdal.org/programs/gdal_translate.html][~gdal_translate~:]]
+   [[https://gdal.org/programs/gdal_translate.html][gdal_translate]]:
 
    #+begin_src bash
    # SET SRS COMMAND: 
@@ -60,7 +60,8 @@ visualize a path on a chart like that.
    #+end_src
   
 5. And resample the image to an defined resolution and coordinate
-   system here Canadian Polar Stereographic = EPSG:5873.
+   system here Canadian Polar Stereographic (EPSG:5937) with
+   [[https://gdal.org/programs/gdalwarp.html][gdalwarp]].
 
    #+begin_src bash
    # RESAMPLE COMMAND: 
