@@ -1,0 +1,84 @@
+* GIS Stack Exchange Question 419683/26213
+
+Q: [[https://gis.stackexchange.com/q/419683/26213][Map lat/lon onto polar stereographic projection map based on two known points on map image]]
+
+Question: I've searched already everywhere but couldn't find anything.
+I have a "polar stereographic projection" map that is true at 60
+degrees latitude north as an [[https://flightplanning.navcanada.ca/Latest/gfa/anglais/produits/uprair/gfa/gfacn31/Latest-gfacn31_cldwx_000.png][image]].  I know on that image the X/Y
+pixel coordinates as well as the corresponding Lat/Lon coordinates for
+a couple of points (but not the actual edges).
+
+Now I am trying to figure out how I can map a couple of Lat/Lon
+coordinates onto that map. So I need to convert Lat/Lon to X/Y pixel.
+
+Currently trying todo that in JavaScript inside the browser to
+visualize a path on a chart like that.
+
+** Suggested Solution
+
+1. The border polygon to set ground control points (GCP's) in the
+   graphic (at least four) (from  [[https://gadm.org/maps/CAN/britishcolumbia_2.html][GADM]] for example),
+
+2. Create a pass point table,
+
+   #+begin_src bash
+   # BC Table GCP
+   # NAME PIX.X PIX.Y WORLD.LON  WORLD.LAT
+     GCP1    99    90     -139        60
+     GCP2   368   137     -120.05     60
+     GCP3   485   453     -114.06     49
+     GCP4   312   459     -122.75     49
+   #+end_src
+
+3. Apply the [[https://proj.org/usage/projections.html][proj.4]] definition string of to get the GCP corresponding
+   to the [[https://proj.org/operations/projections/stere.html][projection]] ~+proj=stere +lat_0=90 +lat_ts=60~.
+  
+   The final table looks like that:
+
+   #+begin_src bash
+   PIX:  99  90 LON.LAT: -139.00  60.00 SPHERE: -2097489.33 2412885.46
+   PIX: 368 137 LON.LAT: -120.05  60.00 SPHERE: -2767377.74 1600967.90
+   PIX: 485 453 LON.LAT: -114.06  49.00 SPHERE: -4070468.40 1817399.23
+   PIX: 312 459 LON.LAT: -122.75  49.00 SPHERE: -3749152.78 2411536.11
+   #+end_src
+
+4. Try to go-reference your picture by these points using the tool
+   [[https://gdal.org/programs/gdal_translate.html][~gdal_translate~:]]
+
+   #+begin_src bash
+   # SET SRS COMMAND: 
+   /usr/bin/gdal_translate \
+     -gcp 099 090 -2097489.33 2412885.46 \
+     -gcp 368 137 -2767377.74 1600967.89 \
+     -gcp 485 453 -4070468.40 1817399.23 \
+     -gcp 312 459 -3749152.78 2411536.10 \
+     -a_srs '+proj=stere +lat_0=90 +lat_ts=60' \ 
+     -expand rgb \ 
+     -of GTiff   \
+     data/Latest-gfacn31_cldwx_000.png \ 
+     data/Latest-gfacn31_cldwx_000_trans.tif
+   #+end_src
+  
+5. And resample the image to an defined resolution and coordinate
+   system here Canadian Polar Stereographic = EPSG:5873.
+
+   #+begin_src bash
+   # RESAMPLE COMMAND: 
+    /usr/bin/gdalwarp -overwrite \
+    -t_srs '+init=epsg:5937' \
+    -tr 2000 2000  \
+    -r lanczos \
+    data/Latest-gfacn31_cldwx_000.tif_trans.tif \
+    data/Latest-gfacn31_cldwx_000.tif-warp.tif
+   #+end_src
+
+  ```
+6. Now you can use your "/Aviation Weather Map/" in an
+   Geo-Information-System like QGIS and overlay spatial data and
+   create augmented maps.
+
+** Copyright
+
+All rights reserved by (C) 2021 A. Weidauer
+<alex.weidauer@huckfinn.de> 2021, is licensed by the 3-clause BSD
+license.

@@ -38,5 +38,6 @@ You will find the sketch in [[./mk-crop-class.R][./mk-crop-class.R]].
 
 ** Copyright
 
-- (C) 2021 A. Weidauer <alex.weidauer@huckfinn.de> 2021
--     and is licensed by the 3-clause BSD license
+All rights reserved by (C) 2021 A. Weidauer
+<alex.weidauer@huckfinn.de> 2021, is licensed by the 3-clause BSD
+license.

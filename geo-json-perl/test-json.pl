@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # -------------------------------------------------------------------------
-# Gis stack exchange test case https://gis.stackexchange.com/q/171279/26213
+# Gis Stack Exchange Test Case https://gis.stackexchange.com/q/171279/26213
 # (C) 2016 Alexander Weidauer <alex.weidauer@huckfinn.de>
 # -------------------------------------------------------------------------
 use strict;
