@@ -10,21 +10,21 @@ sy dx dy [\-p ...] \-c x y [\-c x y ...]
 .PP
 \f[B]gpc\-trfm\f[] is a simple\-minded tool which creates an affine
 transform from a set of at least 3 pass points (\-p) an calculates the
-coordinates given with tag \-c forward or innverse (\-i).
+coordinates given with tag \-c forward or inverse (\-i).
 .SH GENERAL OPTIONS
 .IP \[bu] 2
-\f[B]\-h\f[], \f[B]\-\-help\f[] Show elp message
+\f[B]\-h\f[], \f[B]\-\-help\f[] Show help message
 .IP \[bu] 2
-\f[B]\-i\f[] calculate the inverse coordinates given with option \-c
+\f[B]\-i\f[] Calculate the inverse coordinates given by option \-c
 .IP \[bu] 2
-\f[B]\-d\f[] show debug messages debug
+\f[B]\-d\f[] Show debug messages
 .IP \[bu] 2
 \f[B]\-s\f[] CHAR output column separator default [space]
 .IP \[bu] 2
-\f[B]\-t\f[] list transformations parser friendly
+\f[B]\-t\f[] List transformations parser friendly
 .IP \[bu] 2
 \f[B]\-p\f[] sx sy dx dy \f[B]\-p\f[] sx sy dx dy ...
-pass points at least 3 with sx sy source point dx dy destination point
+Pass points at least 3 with sx sy source point dx dy destination point
 .IP \[bu] 2
 \f[B]\-c\f[] x y \-c x y ...coordinates to transform
 .SH EXAMPLES

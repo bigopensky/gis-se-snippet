@@ -15,19 +15,20 @@ gpc-trfm [-h -d -i -s CHAR] -p sx sy dx dy -p sx sy dx dy -p sx sy dx dy [-p ...
 
 **gpc-trfm** is a simple-minded tool which creates an affine transform
 from a set of at least 3 pass points (-p) an calculates the coordinates
-given with tag -c forward or inverse (-i).
+given by the tag -c using an forward or inverse (-i) transformation.
 
 ## GENERAL OPTIONS
 
-* **-h**, **--help** Show elp message
-* **-i** calculate the inverse coordinates given with option -c
-* **-d** show debug messages debug 
-* **-s** CHAR output column separator default [space]
-* **-t** list transformations parser friendly
-* **-p** sx sy dx dy **-p** sx sy dx dy ... pass points at least 3 with
+* **-h**, **--help** Show help message
+* **-i** Calculate the inverse coordinates given by option -c
+* **-d** Show debug messages 
+* **-s** Output column separator as character default [space]
+* **-t** List transformations parser friendly
+* **-p** sx sy dx dy **-p** sx sy dx dy ... 
+    Pass points at least 3 with:
     sx sy  source point
     dx dy  destination point
-* **-c** x y -c x y ...coordinates to transform
+* **-c** x y -c x y Coordinates to transform
 
 ## EXAMPLES
 
@@ -71,6 +72,9 @@ Human friendly form
 
 ## License
 
+ Alexander Weidauer <alex.weidauer@huckfinn.de>
+ All Rights Reserved 
+
  gpc-trfm.c is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
@@ -83,5 +87,4 @@ Human friendly form
 
  You should have received a copy of the GNU General Public License
  along with gpc-trfm.c.  If not, see <http://www.gnu.org/licenses/>.
-
 
