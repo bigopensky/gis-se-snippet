@@ -4,7 +4,7 @@
 gpc\-trfm \[en] Build an affine transform and calculate coordinates
 .SH SYNOPSIS
 .PP
-gpc_trfm [\-h \-d \-i \-s CHAR] \-p sx sy dx dy \-p sx sy dx dy \-p sx
+gpc\-trfm [\-h \-d \-i \-s CHAR] \-p sx sy dx dy \-p sx sy dx dy \-p sx
 sy dx dy [\-p ...] \-c x y [\-c x y ...]
 .SH DESCRIPTION
 .PP
@@ -30,11 +30,11 @@ Pass points at least 3 with sx sy source point dx dy destination point
 .SH EXAMPLES
 .RS
 .PP
-gpc_trfm \-s "|" \-p 1 0 10 0 \-p 0 1 0 10 \-p 1 1 10 10 \-c 1 1 \-c 1 0
+gpc\-trfm \-s "|" \-p 1 0 10 0 \-p 0 1 0 10 \-p 1 1 10 10 \-c 1 1 \-c 1 0
 .RE
 .RS
 .PP
-gpc_trfm \-i \-p 1 0 10 0 \-p 0 1 0 10 \-p 1 1 10 10 \-c 1 1 \-c 1 0
+gpc\-trfm \-i \-p 1 0 10 0 \-p 0 1 0 10 \-p 1 1 10 10 \-c 1 1 \-c 1 0
 .RE
 .SH OUTPUT
 .PP
