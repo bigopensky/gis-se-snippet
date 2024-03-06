@@ -18,11 +18,11 @@
 // You should have received a copy of the GNU General Public License
 // along with alg,h.  If not, see <http://www.gnu.org/licenses/>.
 // =====================================================================
-
-
+#include <stdio.h>
+#include <stdlib.h>
 
 // Maschine ZERO DOUBLE
-#define DBL_EPSILON 2.2204460492503131e-16
+//# define DBL_EPSILON 2.2204460492503131e-16
 
 // Error codes
 #define ERR_TRFM_SIZE_EQUAL 3010;

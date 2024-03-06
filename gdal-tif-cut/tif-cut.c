@@ -20,22 +20,23 @@
 #include <stdlib.h>
 #include <string.h>
 #include <regex.h>
-#include <gdal.h>
-#include <ogr_srs_api.h>
-#include <cpl_conv.h>
-#include <cpl_string.h>
+#include <gdal/gdal.h>
+#include <gdal/ogr_srs_api.h>
+#include <gdal/cpl_error.h>
+#include <gdal/cpl_conv.h>
+#include <gdal/cpl_string.h>
 #include "alg.h"
 
-// -------------------------------------------------------------------
+// =====================================================================
 int main(int argc, char **argv)
 {
 
   char *ERROR_PRM = "Invalid numeric value %s: %s\n!";
 
-  // register GDAL drivers
+  // Register GDAL drivers
   GDALAllRegister();
 
-  // set format GTiff with error handling 
+  // Set format GTiff with error handling
   const char *format = "GTiff";
   GDALDriverH h_drv = GDALGetDriverByName( format );
   if( h_drv == NULL ) {
@@ -74,34 +75,31 @@ int main(int argc, char **argv)
     error_exit(1000+3,ERROR_PRM,"SZ",argv[4]);
   }
 
-  // Init affine transfomation vector 
+  // Init affine transfomation vector
   double trfm[] ={0,0,0,0,0,0};
 
-  // init vectors for id's and positions
-  int_vector_t id;
-  int_vector_init(&id, 10);
-  dbl_vector_t pos_x;
-  dbl_vector_init(&pos_x, 10);
-  dbl_vector_t pos_y;
-  dbl_vector_init(&pos_y, 10);
+  // Init vectors for id's and positions
+  int_vector_t id;     int_vector_init(&id, 10);
+  dbl_vector_t pos_x;  dbl_vector_init(&pos_x, 10);
+  dbl_vector_t pos_y;  dbl_vector_init(&pos_y, 10);
 
   // Read center positions of the window from cli
   int a = 5; double dbl; int pk;
   while( a < argc-2 ) {
 
-    // parse id coordinate
+    // Parse id coordinate
     if (! sscanf(argv[a],"%d",&pk) ) {
       error_exit(1000+a,ERROR_PRM,"ID", argv[a]);
     }
     int_vector_add(&id,pk);
 
-    // parse x coordinate
+    // Parse x coordinate
     if (! sscanf(argv[a+1],"%lf",&dbl) ) {
       error_exit(1000+a+1,ERROR_PRM,"X", argv[a+1]);
     }
     dbl_vector_add(&pos_x,dbl);
 
-    // parse y coordinate
+    // Parse y coordinate
     if (! sscanf(argv[a+2],"%lf",&dbl) ) {
       error_exit(1000+a+2,ERROR_PRM,"Y", argv[a+2]);
     }
@@ -110,21 +108,21 @@ int main(int argc, char **argv)
     a+=3;
   }
 
-  // open geotiff and handle error
-  printf("# IN FILE:  %s\n", ifile);
+  // Open geotiff and handle error
+  printf("# IN.FILE:   %s\n", ifile);
   GDALDatasetH h_dsrc = GDALOpen( ifile, GA_ReadOnly);
   if( h_dsrc == NULL ) {
     error_exit(10, "File %s is not accessible!\n", ifile);
   }
-  printf("# OUT FILE: %s\n", ofile);
+  printf("# OUT.FILE:  %s\n", ofile);
   printf("# EXTENTION: %s\n", ext);
 
   // Read transformation and handle error
   if( GDALGetGeoTransform( h_dsrc, trfm ) == CE_None ) {
-    printf("# TRANSFORM: \n");
+    printf("# TRANSFORM: BEGIN\n");
     printf("#  X = %.6f + %.6f * COL + %.6f * ROW\n",
 	   trfm[0], trfm[1], trfm[2] );
-    printf("#  Y = %.6f + %.6f * COL + %.6f * ROW\n# EOF:\n",
+    printf("#  Y = %.6f + %.6f * COL + %.6f * ROW\n# END.TRANSFORM:\n",
 	   trfm[3], trfm[4], trfm[5] );
   } else {
     error_exit(10, "Transformation not avialable in TIFF!\n");
@@ -141,7 +139,7 @@ int main(int argc, char **argv)
   int img_height = GDALGetRasterYSize( h_dsrc );
   int num_bands  = GDALGetRasterCount (h_dsrc );
 
-  // Get band infos 
+  // Get band infos
   GDALRasterBandH h_band[num_bands];
   GDALDataType    h_type[num_bands];
   int             h_tsize[num_bands];
@@ -151,7 +149,7 @@ int main(int argc, char **argv)
     h_tsize[b] = GDALGetDataTypeSize(h_type[b]);
   }
 
-  // Create sub images 
+  // Create sub images
   for (int c=0; c< pos_x.length; c++ ) {
 
     // Transform cut position (world) to image positions
@@ -163,17 +161,17 @@ int main(int argc, char **argv)
     sprintf(cfile,"%s.%d%s",ofile, id.data[c],ext);
 
     // Test if the window is inside the image and
-    // skip the stuff if outside 
+    // skip the stuff if outside
     if (icol-size/2<=0 ||
 	irow-size/2<=0 ||
 	icol+size/2>=img_width ||
 	irow+size/2>=img_height){
-      printf ("IGN %d %s\n",id.data[c],ofile);
+      printf(" IGN: %d %s\n",id.data[c],ofile);
       continue;
     }
 
     // cut the sub image
-    printf ("ADD %d %s\n",id.data[c],ofile);
+    printf (" ADD: %d %s\n",id.data[c],ofile);
 
     int ioffs_col = icol-size/2;
     int ioffs_row = irow-size/2;
@@ -183,16 +181,16 @@ int main(int argc, char **argv)
     GDALDatasetH h_ddst = GDALCreate( h_drv,
 		 cfile, size, size, num_bands, h_type[0], NULL);
 
-    // Set transformation  
+    // Set transformation
     double foffx = icol-size/2.0;
-    double foffy = irow-size/2.0; 
+    double foffy = irow-size/2.0;
     double goffx = 0;
-    double goffy = 0; 
-    trfm_pix_geo( trfm, (int) round(foffx), (int) round(foffy), &goffx, &goffy); 
+    double goffy = 0;
+    trfm_pix_geo( trfm, (int) round(foffx), (int) round(foffy), &goffx, &goffy);
     double trfm_dst[6] = { goffx, trfm[1], trfm[2], goffy, trfm[4], trfm[5] };
 
-    // Copy spatial reference system 
-    char *dsrs_wkt = NULL; 
+    // Copy spatial reference system
+    char *dsrs_wkt = NULL;
     OSRExportToWkt( h_dsrs, &dsrs_wkt );
     GDALSetGeoTransform( h_ddst, trfm_dst);
     GDALSetProjection( h_ddst, dsrs_wkt);
@@ -203,15 +201,26 @@ int main(int argc, char **argv)
 
       // alloc io buffer for the copy @todo static
       void *io_buffer = CPLMalloc(h_tsize[0] * size * size);
+      CPLErr errCode = CE_None;
 
       // copy pixels
-      GDALRasterIO( h_band[b], GF_Read,
-		    ioffs_col, ioffs_row, size, size,
-		    io_buffer, size, size, h_type[b], 0, 0 );
+      errCode = GDALRasterIO( h_band[b], GF_Read,
+		              ioffs_col, ioffs_row, size, size,
+                	      io_buffer, size, size, h_type[b], 0, 0 );
+      // Check error read
+      if ( errCode == CE_Failure || errCode == CE_Fatal ) {
+         error_exit(2010, "Cannot read data band %d ", b+1);
+      }
+
       // address pixel to band handle of and copy the io buffer
       GDALRasterBandH h_band_out = GDALGetRasterBand(h_ddst, b+1);
-      GDALRasterIO( h_band_out, GF_Write, 0, 0, size, size,
-		    io_buffer, size, size, h_type[b], 0, 0 );
+      errCode = GDALRasterIO( h_band_out, GF_Write, 0, 0, size, size,
+		              io_buffer, size, size, h_type[b], 0, 0 );
+      // Check error write
+      if ( errCode == CE_Failure || errCode == CE_Fatal ) {
+         error_exit(2020, "Cannot read data band %d ", b+1);
+      }
+
       // free io buffer
       CPLFree(io_buffer);
     }
@@ -226,4 +235,3 @@ int main(int argc, char **argv)
 }
 
 // --- EOF -----------------------------------------------------------
-

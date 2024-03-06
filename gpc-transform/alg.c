@@ -82,7 +82,8 @@ int trfm_create(dbl_vector_t *src_x,
 
     // Build equations
     for (int i = 0; i < src_x->length; i++) {
-
+        // printf("D: %d %f %f %f %f\n",
+        // i, src_x->data[i], src_y->data[i], dst_x->data[i], dst_y->data[i]);
         // Normalform of source 1 points
         M->data[0 * M->tda + 0] += src_x->data[i] * src_x->data[i];
         M->data[0 * M->tda + 1] += src_x->data[i] * src_y->data[i];
@@ -103,12 +104,28 @@ int trfm_create(dbl_vector_t *src_x,
         B2->data[1 * B2->stride] += dst_y->data[i] * src_y->data[i];
         B2->data[2 * B2->stride] += dst_y->data[i];
     }
-
     // Set missing comps
     gsl_matrix_set(M, 2, 2, src_x->length);
     gsl_matrix_set(M, 2, 1, gsl_matrix_get(M, 1, 2));
     gsl_matrix_set(M, 2, 0, gsl_matrix_get(M, 0, 2));
-
+    /*
+    printf("\nM[0] %f %f %f\n", gsl_matrix_get(M , 0, 0),
+                         gsl_matrix_get(M , 0, 1),
+                         gsl_matrix_get(M , 0, 2));
+    printf("M[1] %f %f %f\n", gsl_matrix_get(M , 1, 0),
+                         gsl_matrix_get(M , 1, 1),
+                         gsl_matrix_get(M , 1, 2));
+    printf("M[3] %f %f %f\n", gsl_matrix_get(M , 2, 0),
+                         gsl_matrix_get(M , 2, 1),
+                         gsl_matrix_get(M , 2, 2));
+    printf("B1 %f %f %f\n", B1->data[0 * B1->stride],
+                            B1->data[1 * B1->stride],
+                            B1->data[2 * B1->stride]);
+    printf("B2 %f %f %f\n\n", B2->data[0 * B2->stride],
+                            B2->data[1 * B2->stride],
+                            B2->data[2 * B2->stride]);
+    */
+    // build/gpc-trfm -p 601786 5771108 4 210 -p 601786 5771318 4 0 -p 602066 5771108 285 210 -p 602066 5771318 285 0 -c 601786 5771108 -c 602066 5771318
     // Solve equation
     int s = 0;
     gsl_permutation * P = gsl_permutation_alloc(3);
