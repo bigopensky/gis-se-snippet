@@ -11,7 +11,7 @@ LGDAL   = -lgdal
 all:	build/gpc-trfm 
 
 clean:
-	rm build/*
+	rm -f build/*
 
 build/gpc-trfm: gpc-trfm.c alg.c
 	gcc  -o build/gpc-trfm gpc-trfm.c alg.c `gsl-config --cflags --libs`

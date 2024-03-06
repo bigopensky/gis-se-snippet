@@ -21,6 +21,11 @@
 #include <string.h>
 #include "alg.h"
 
+// Output decoration
+#define FOOTER "# EOF\n\n"
+#define TITLE  "# TOOL: GPC TRANSFORM\n"
+#define HEADER "# HEAD: SRC.X SRC.Y TRFM.X TRFM.Y ERROR.X ERROR.Y\n"
+
 // ====================================================================
 // Main program
 // ====================================================================
@@ -28,21 +33,14 @@ int main(int argc, char* argv[]) {
 
     // Text message template for usage
     char *msg_usage =
-            "USAGE: %s [-h -d -s CHAR] -p sx sy dx dy -p sx sy dx dy -p sx sy dx dy [-p ...] -c x y [-c x y ...]\n";
+         "USAGE: %s [-h -d -s CHAR] -p sx sy dx dy "
+         "-p sx sy dx dy -p sx sy dx dy [-p ...] -c x y [-c x y ...]\n";
 
     // Error text template ..use once
-    char *error_tmpl_single = "Please use option '%s' not twice!";
+    char const *error_tmpl_single = "Please use option '%s' not twice!";
 
     // Error text template numerical error
-    char *error_tmpl_num = "Invalid numerical value for %s: %s\n!";
-
-	// Output decoration
-    char *FOOTER =
-    "# EOF\n\n";
-    char *TITLE =
-    "# TOOL: GPC TRANSFORM\n";
-    char *HEADER =
-    "# HEAD: SRC.X SRC.Y TRFM.X TRFM.Y ERROR.X ERROR.Y\n";
+    char const *error_tmpl_num = "Invalid numerical value for %s: %s\n!";
 
     // Output separator default value
     char *sep = " "; int parse_sep = 0;

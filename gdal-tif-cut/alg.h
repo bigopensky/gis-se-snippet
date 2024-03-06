@@ -22,7 +22,10 @@
 #include <stdlib.h>
 
 // Maschine ZERO DOUBLE
-//# define DBL_EPSILON 2.2204460492503131e-16
+#ifndef DBL_EPSILON
+  #define DBL_EPSILON 2.2204460492503131e-16
+#endif
+
 
 // Error codes
 #define ERR_TRFM_SIZE_EQUAL 3010;
