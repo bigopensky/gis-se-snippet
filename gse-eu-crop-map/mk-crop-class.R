@@ -54,7 +54,7 @@ file.country.250 <- sprintf('%s/%s_%s_250.tif',
                         DATA_DIR, EUROPE, COUNTRY)
 
 # Download the file if it not exists (Large 6.2 GiB
-if ( ! file.exists(file.large) {
+if ( ! file.exists(file.large) ) {
   download.file('https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EUCROPMAP/2018/EUCROPMAP_2018.tif',
                 file.large);
 }
